@@ -42,21 +42,50 @@
                             <constraint firstAttribute="height" constant="1" id="WR8-Eu-889"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Load" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pFz-SW-zrm">
+                        <rect key="frame" x="318" y="33" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="N2h-vB-U5b"/>
+                            <constraint firstAttribute="width" secondItem="pFz-SW-zrm" secondAttribute="height" multiplier="1:1" id="OiD-Qp-ixN"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coa-we-RWD">
+                        <rect key="frame" x="307.5" y="22.5" width="46" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="46" id="3xP-Ro-2eP"/>
+                            <constraint firstAttribute="width" secondItem="Coa-we-RWD" secondAttribute="height" multiplier="1:1" id="OoA-0E-ZgA"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="didSelectDownloadButton" destination="0Vi-3y-GzM" eventType="touchUpInside" id="eBP-E7-7Ly"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="pFz-SW-zrm" secondAttribute="trailing" constant="32" id="BWK-3j-jRs"/>
+                    <constraint firstItem="pFz-SW-zrm" firstAttribute="centerY" secondItem="X9m-Qz-Phc" secondAttribute="centerY" id="NB4-cC-9Wn"/>
                     <constraint firstAttribute="bottom" secondItem="PGG-ky-eKh" secondAttribute="bottom" id="P3S-e3-LCT"/>
                     <constraint firstItem="PGG-ky-eKh" firstAttribute="leading" secondItem="ZS3-79-cUr" secondAttribute="leading" id="SS1-ky-OMG"/>
+                    <constraint firstItem="Coa-we-RWD" firstAttribute="centerX" secondItem="pFz-SW-zrm" secondAttribute="centerX" id="VRE-Er-tBw"/>
                     <constraint firstItem="S0e-sX-cBl" firstAttribute="leading" secondItem="X9m-Qz-Phc" secondAttribute="leading" constant="16" id="Yg6-e2-YUz"/>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="S0e-sX-cBl" secondAttribute="trailing" constant="16" id="aib-6p-8kB"/>
                     <constraint firstAttribute="trailing" secondItem="PGG-ky-eKh" secondAttribute="trailing" id="cF4-oS-Wbd"/>
+                    <constraint firstItem="pFz-SW-zrm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S0e-sX-cBl" secondAttribute="trailing" constant="8" id="jJr-rW-QRP"/>
+                    <constraint firstItem="Coa-we-RWD" firstAttribute="centerY" secondItem="pFz-SW-zrm" secondAttribute="centerY" id="ldb-5s-B1j"/>
                     <constraint firstItem="S0e-sX-cBl" firstAttribute="centerY" secondItem="X9m-Qz-Phc" secondAttribute="centerY" id="uKm-ez-FK5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="actionButton" destination="Coa-we-RWD" id="ylW-yy-Kl7"/>
+                <outlet property="actionImage" destination="pFz-SW-zrm" id="o6A-Gd-Out"/>
                 <outlet property="numberLabel" destination="gjb-Mp-SjS" id="0CZ-9m-fAi"/>
                 <outlet property="songNameLabel" destination="ZS3-79-cUr" id="F0s-ml-xoS"/>
             </connections>
             <point key="canvasLocation" x="20" y="102.99850074962519"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Load" width="51.200000762939453" height="51.200000762939453"/>
+    </resources>
 </document>

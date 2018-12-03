@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var errorButton: UIButton!
     
     @IBAction func onErrorButtonClickHandler() {
-        updateData()
+        updateData(usingCachedReponse: false)
     }
     
     lazy var mapper: ModelsMapper = GenericDecodableMapper<LookUpModel>()
@@ -34,17 +34,25 @@ class ViewController: UIViewController {
         tableVIew.isHidden = true
         
         switch Reachability()!.connection {
-        case .cellular, .wifi: updateData()
-        case .none: handleError()
+        case .cellular, .wifi: updateData(usingCachedReponse: false)
+        case .none: updateData(usingCachedReponse: true)
         }
     }
     
-    func updateData() {
+    func updateData(usingCachedReponse: Bool) {
         SVProgressHUD.show()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         let url = URL(string: "https://itunes.apple.com/lookup?amgArtistId=468749,5723,2347,13987,234&entity=song&limit=500")!
-//        let url = URL(string: "https://itunes.apple.com/lookup?amgArtistId=461231238749&entity=songas&limit=500")!
-        let task = URLSession.shared.downloadTask(with: url) { [weak self] (localUrl, response, error) in
+        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
+        
+        if usingCachedReponse, let cachedResponse = URLCache.shared.cachedResponse(for: request) {
+            loadingResult = mapper.performMapping(data: cachedResponse.data)
+            loadingDidComplete()
+            return
+        }
+        
+        let task = URLSession.shared.downloadTask(with: request) { [weak self] (localUrl, response, error) in
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -58,6 +66,11 @@ class ViewController: UIViewController {
             guard let localURL = localUrl else { return }
             guard let data = try? Data(contentsOf: localURL, options: .mappedIfSafe) else { return }
             self?.loadingResult = self?.mapper.performMapping(data: data)
+            
+            if let response = response, URLCache.shared.cachedResponse(for: request) == nil {
+                let cachedResponse = CachedURLResponse(response: response, data: data)
+                URLCache.shared.storeCachedResponse(cachedResponse, for: request)
+            }
             
             DispatchQueue.main.async {
                 self?.loadingDidComplete()
@@ -82,6 +95,7 @@ class ViewController: UIViewController {
     }
     
     func loadingDidComplete() {
+        SVProgressHUD.dismiss()
         updateArtistsList()
         self.tableVIew.reloadData()
     }

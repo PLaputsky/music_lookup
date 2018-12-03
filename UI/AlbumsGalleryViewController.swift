@@ -58,7 +58,10 @@ class AlbumsGalleryViewController: UIViewController {
         
         title = "Albums"
         setupCollectionView(collectionView)
-        
+        validateItems()
+    }
+    
+    func validateItems() {
         if items?.isEmpty ?? true {
             errorLabel.text = "There are no related albums.\nPlease go back and check this artist later"
             errorButton.setTitle("Go back", for: .normal)

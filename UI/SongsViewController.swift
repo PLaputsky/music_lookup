@@ -11,6 +11,7 @@ import SVProgressHUD
 import Kingfisher
 import MediaPlayer
 import AVFoundation
+import Reachability
 
 enum SongsViewControllerSection: Int {
     case albumDetails = 0
@@ -28,9 +29,23 @@ class AlbumDetailsTableViewCell: UITableViewCell {
     }
 }
 
+protocol SongTableViewCellDelegate: class {
+    func didClickOnDownloadButton(with index: IndexPath)
+}
+
 class SongTableViewCell: UITableViewCell {
+    weak var delegate: SongTableViewCellDelegate?
+    var indexPath: IndexPath?
+    
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var songNameLabel: UILabel!
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var actionImage: UIImageView!
+    
+    @IBAction func didSelectDownloadButton() {
+        guard let indexPath = indexPath else { return }
+        delegate?.didClickOnDownloadButton(with: indexPath)
+    }
 }
 
 class SongsViewController: UIViewController {
@@ -50,7 +65,16 @@ class SongsViewController: UIViewController {
     @IBOutlet weak var currentSongImageView: UIImageView!
     @IBOutlet weak var currentSongLabel: UILabel!
     @IBOutlet weak var playStopButton: UIButton!
-
+    
+    var currentSongIndex: Int?
+    var player: AVAudioPlayer?
+    
+    lazy var httpService = HTTPClientQueue(maxConcurrentTasks: 5, operationsBuilder: HTTPOperationBuilderImp())
+    lazy var mapper: ModelsMapper = GenericDecodableMapper<LookUpModel>()
+    
+    var songs: [LookUpItem]?
+    var presavedSongs: [LookUpItem]?
+    
     @IBAction func playStopAction() {
         
         if currentSongIndex == nil, songs?.isEmpty == false {
@@ -67,15 +91,6 @@ class SongsViewController: UIViewController {
         togglePlayerButton()
     }
     
-    var currentSongIndex: Int?
-    var player: AVAudioPlayer?
-    
-    lazy var httpService = HTTPClientQueue(maxConcurrentTasks: 5, operationsBuilder: HTTPOperationBuilderImp())
-    lazy var mapper: ModelsMapper = GenericDecodableMapper<LookUpModel>()
-    
-    var loadingResult: LookUpModel?
-    var songs: [LookUpItem]?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         touchPreventView.isHidden = true
@@ -85,13 +100,16 @@ class SongsViewController: UIViewController {
         tableVIew.separatorStyle = .none
         
         title = ""
+        
+        fetchPresavedSongs()
+        validateItems()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         player?.stop()
         player = nil
         SVProgressHUD.dismiss()
-        
     }
     
     class func instantiate(with lookUpItems: [LookUpItem]) -> SongsViewController {
@@ -101,7 +119,7 @@ class SongsViewController: UIViewController {
     }
     
     func validateItems() {
-        if loadingResult?.results.isEmpty ?? true {
+        if songs?.isEmpty ?? true {
             errorLabel.text = "There are no new relevant songs in this album.\nPlease go back and check the album later"
             errorButton.setTitle("Go back", for: .normal)
             showError()
@@ -113,6 +131,13 @@ class SongsViewController: UIViewController {
         errorLabel.isHidden = false
         errorButton.isHidden = false
         tableVIew.isHidden = true
+    }
+    
+    func fetchPresavedSongs() {
+        guard let savedSongsData = UserDefaults.standard.object(forKey: "songs") as? Data else { return }
+        guard let savedSongs = try? JSONDecoder().decode(Array<LookUpItem>.self, from: savedSongsData) else { return }
+        
+        presavedSongs = savedSongs
     }
 }
 
@@ -158,8 +183,16 @@ extension SongsViewController: UITableViewDataSource {
     
     func songCell(with tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.instantiateCell(at: indexPath, SongTableViewCell.self)!
+        cell.delegate = self
+        cell.indexPath = indexPath
         
         if let song = songs?[indexPath.row] {
+            
+            if presavedSongs?.contains(where: { $0.trackID == song.trackID }) == true {
+                cell.actionImage.image = UIImage(named: "Loaded")
+                cell.actionButton.isHidden = true
+            }
+            
             cell.numberLabel.text = "\(song.trackNumber ?? 0)"
             cell.songNameLabel.text = song.trackName ?? ""
         }
@@ -196,13 +229,22 @@ extension SongsViewController: UITableViewDelegate {
         
         currentSongIndex = index.row
         
-        downloadSong(withUrl: url)
+        downloadSong(withUrl: url) { [weak self] data, url in
+            DispatchQueue.main.async {
+                self?.playSong(with: data)
+            }
+        }
     }
     
-    func downloadSong(withUrl url: URL) {
+    func downloadSong(withUrl url: URL, completionHandler: @escaping (Data, URL?) -> Void) {
+        if Reachability()!.connection == .none {
+            handleError()
+            return
+        }
+        
         let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
         if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
-            playSong(with: cachedResponse.data)
+            completionHandler(cachedResponse.data, url)
             return
         }
         
@@ -217,12 +259,8 @@ extension SongsViewController: UITableViewDelegate {
                 self?.touchPreventView.isHidden = true
             }
             
-            guard let url = localUrl, error == nil else {
-                self?.handleError()
-                return
-            }
-            
-            guard let data = try? Data(contentsOf: url) else  {
+            guard let url = localUrl, error == nil,
+                let data = try? Data(contentsOf: url) else {
                 self?.handleError()
                 return
             }
@@ -232,9 +270,7 @@ extension SongsViewController: UITableViewDelegate {
                 URLCache.shared.storeCachedResponse(cachedResponse, for: request)
             }
             
-            DispatchQueue.main.async {
-                self?.playSong(with: data)
-            }
+            completionHandler(data, response?.url)
         }
         task.resume()
     }
@@ -309,5 +345,54 @@ extension SongsViewController: UITableViewDelegate {
 extension SongsViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         togglePlayerButton()
+    }
+}
+
+extension SongsViewController: SongTableViewCellDelegate {
+    func didClickOnDownloadButton(with index: IndexPath) {
+        saveSong(at: index)
+    }
+    
+    func saveSong(at index: IndexPath) {
+        guard let song = songs?[index.row],
+            let preivewUrlString = song.previewURL,
+            let preivewUrl = URL(string: preivewUrlString) else { return }
+        
+        downloadSong(withUrl: preivewUrl) { [weak self] data, url in
+            do {
+                let fileName = url?.lastPathComponent
+                let dirUrl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                let fileURL = dirUrl.appendingPathComponent(fileName!)
+                try data.write(to: fileURL)
+                
+            } catch {
+                self?.handleError()
+            }
+            
+            self?.saveSongInfo(with: url)
+        }
+    }
+    
+    func saveSongInfo(with url: URL?) {
+        guard let url = url, let songIndex = songs?.firstIndex(where: {$0.previewURL?.contains(url.lastPathComponent) ?? false}), let song = songs?[songIndex] else {
+            handleError()
+            return
+        }
+        
+        var presavedSongs = self.presavedSongs ?? []
+        presavedSongs.append(song)
+        
+        guard let encoded = try? JSONEncoder().encode(presavedSongs) else {
+            handleError()
+            return
+        }
+        
+        UserDefaults.standard.set(encoded, forKey: "songs")
+        
+        DispatchQueue.main.async { [ weak self] in
+            let indexPath = IndexPath.init(row: songIndex, section: SongsViewControllerSection.songs.rawValue)
+            self?.presavedSongs = presavedSongs
+            self?.tableVIew.reloadRows(at: [indexPath], with: .fade)
+        }
     }
 }

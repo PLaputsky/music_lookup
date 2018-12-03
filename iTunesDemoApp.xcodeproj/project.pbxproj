@@ -32,6 +32,8 @@
 		3DA5826121B411EE006E26E7 /* AlbumsGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5826021B411EE006E26E7 /* AlbumsGalleryViewController.swift */; };
 		3DA5826421B4129D006E26E7 /* StoryboardControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5826321B4129D006E26E7 /* StoryboardControllerProvider.swift */; };
 		3DA5826621B41A9F006E26E7 /* AlbumsGalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA5826521B41A9F006E26E7 /* AlbumsGalleryCollectionViewCell.xib */; };
+		3DC1A48921B5863A00E48551 /* DownloadedSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC1A48821B5863A00E48551 /* DownloadedSongsViewController.swift */; };
+		3DC1A48B21B5875400E48551 /* DownloadedSongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC1A48A21B5875400E48551 /* DownloadedSongTableViewCell.xib */; };
 		3DC3A3AC21B44DB7004A5747 /* SongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3A3AB21B44DB7004A5747 /* SongsViewController.swift */; };
 		3DC3A3AE21B45CD8004A5747 /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC3A3AD21B45CD8004A5747 /* SongTableViewCell.xib */; };
 		3DC3A3B021B45CEF004A5747 /* AlbumDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC3A3AF21B45CEF004A5747 /* AlbumDetailsTableViewCell.xib */; };
@@ -81,6 +83,8 @@
 		3DA5826021B411EE006E26E7 /* AlbumsGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsGalleryViewController.swift; sourceTree = "<group>"; };
 		3DA5826321B4129D006E26E7 /* StoryboardControllerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardControllerProvider.swift; sourceTree = "<group>"; };
 		3DA5826521B41A9F006E26E7 /* AlbumsGalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumsGalleryCollectionViewCell.xib; sourceTree = "<group>"; };
+		3DC1A48821B5863A00E48551 /* DownloadedSongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedSongsViewController.swift; sourceTree = "<group>"; };
+		3DC1A48A21B5875400E48551 /* DownloadedSongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DownloadedSongTableViewCell.xib; sourceTree = "<group>"; };
 		3DC3A3AB21B44DB7004A5747 /* SongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewController.swift; sourceTree = "<group>"; };
 		3DC3A3AD21B45CD8004A5747 /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
 		3DC3A3AF21B45CEF004A5747 /* AlbumDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumDetailsTableViewCell.xib; sourceTree = "<group>"; };
@@ -172,10 +176,12 @@
 				3D1A2BBD21B35554005F427E /* ViewController.swift */,
 				3DA5826021B411EE006E26E7 /* AlbumsGalleryViewController.swift */,
 				3DC3A3AB21B44DB7004A5747 /* SongsViewController.swift */,
+				3DC1A48821B5863A00E48551 /* DownloadedSongsViewController.swift */,
 				3DC3A3B121B462C6004A5747 /* UITableView+Helpers.swift */,
 				3DA5826521B41A9F006E26E7 /* AlbumsGalleryCollectionViewCell.xib */,
 				3DC3A3AF21B45CEF004A5747 /* AlbumDetailsTableViewCell.xib */,
 				3DC3A3AD21B45CD8004A5747 /* SongTableViewCell.xib */,
+				3DC1A48A21B5875400E48551 /* DownloadedSongTableViewCell.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 			files = (
 				3DC3A3AE21B45CD8004A5747 /* SongTableViewCell.xib in Resources */,
 				3D1A2BC621B35558005F427E /* LaunchScreen.storyboard in Resources */,
+				3DC1A48B21B5875400E48551 /* DownloadedSongTableViewCell.xib in Resources */,
 				3DC3A3B021B45CEF004A5747 /* AlbumDetailsTableViewCell.xib in Resources */,
 				3D1A2BC321B35558005F427E /* Assets.xcassets in Resources */,
 				3D1A2BC121B35554005F427E /* Main.storyboard in Resources */,
@@ -448,6 +455,7 @@
 				3D1A2BE321B35858005F427E /* HTTPResponse.swift in Sources */,
 				3D1A2C0121B36812005F427E /* LookUpModel.swift in Sources */,
 				3DA5826121B411EE006E26E7 /* AlbumsGalleryViewController.swift in Sources */,
+				3DC1A48921B5863A00E48551 /* DownloadedSongsViewController.swift in Sources */,
 				3D1A2BF321B35B91005F427E /* HTTPNetworkOperationImp.swift in Sources */,
 				3D1A2BF521B35BC6005F427E /* HTTPOperationBuilderImp.swift in Sources */,
 				3D1A2BBE21B35554005F427E /* ViewController.swift in Sources */,

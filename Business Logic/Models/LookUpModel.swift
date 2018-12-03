@@ -122,3 +122,4 @@ enum WrapperType: String, Codable {
     case artist = "artist"
     case track = "track"
 }
+
