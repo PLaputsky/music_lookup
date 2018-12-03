@@ -2,19 +2,23 @@
 
 This is a small project to test iTunes Search API behavior. 
 
-Please go through the following steps to play with it on your real device: 
-1. Clone or download the project to your local machine.
+Please note: Real device should be used to test Music Player.
+
+Please go through the following steps to build the app: 
+
+1. Clone the poject to your MAC or project ZIP archive:
+`git clone https://github.com/PLaputsky/music_lookup`
 
 2. Open terminal and go to project folder (drag and drop can be used here): 
-cd ./pathToProject 
+`cd ./projectPath`
 
 3. Setup up-to-date pods dependencies: 
-pod install 
+`pod install`
 
-4. Create new Apple ID, if already don’t have Apple ID that is not connected to Developer Program.
+4. Create new Apple ID, if you don’t have Apple ID that is not connected to Free Developer Program:
 https://appleid.apple.com/account
 
-5. Open the project using .workspace file.
+5. Go to project folder and open the project using .xcworkspace file.
 
 6. Go to Xcode -> Preferences -> Accounts and click a plus in the left-bottom corner.
 
@@ -24,6 +28,8 @@ https://appleid.apple.com/account
 
 9. Go to Project -> General -> Signing and select a team that was already automatically created (steps 4-7)
 
-10. Select your real device in Xcode device list and start building the project.
+10. Select your real device in Xcode devices list and start building the project.
 
 11. Follow instructions on your device.
+
+12. Enjoy the app :)
