@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongTableViewCell" rowHeight="91" id="0Vi-3y-GzM" customClass="SongTableViewCell" customModule="iTunesDemoApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Vi-3y-GzM" id="X9m-Qz-Phc">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="S0e-sX-cBl">
+                        <rect key="frame" x="16" y="35" width="66" height="20.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjb-Mp-SjS">
+                                <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZS3-79-cUr">
+                                <rect key="frame" x="24" y="0.0" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGG-ky-eKh">
+                        <rect key="frame" x="40" y="89.5" width="335" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="WR8-Eu-889"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="PGG-ky-eKh" secondAttribute="bottom" id="P3S-e3-LCT"/>
+                    <constraint firstItem="PGG-ky-eKh" firstAttribute="leading" secondItem="ZS3-79-cUr" secondAttribute="leading" id="SS1-ky-OMG"/>
+                    <constraint firstItem="S0e-sX-cBl" firstAttribute="leading" secondItem="X9m-Qz-Phc" secondAttribute="leading" constant="16" id="Yg6-e2-YUz"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="S0e-sX-cBl" secondAttribute="trailing" constant="16" id="aib-6p-8kB"/>
+                    <constraint firstAttribute="trailing" secondItem="PGG-ky-eKh" secondAttribute="trailing" id="cF4-oS-Wbd"/>
+                    <constraint firstItem="S0e-sX-cBl" firstAttribute="centerY" secondItem="X9m-Qz-Phc" secondAttribute="centerY" id="uKm-ez-FK5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="numberLabel" destination="gjb-Mp-SjS" id="0CZ-9m-fAi"/>
+                <outlet property="songNameLabel" destination="ZS3-79-cUr" id="F0s-ml-xoS"/>
+            </connections>
+            <point key="canvasLocation" x="20" y="102.99850074962519"/>
+        </tableViewCell>
+    </objects>
+</document>

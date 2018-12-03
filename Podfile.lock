@@ -1,0 +1,24 @@
+PODS:
+  - Kingfisher (4.9.0)
+  - ReachabilitySwift (4.2.1)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Kingfisher (~> 4.0)
+  - ReachabilitySwift
+  - SVProgressHUD
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Kingfisher
+    - ReachabilitySwift
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
+  ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: e9dea348fab012df96c2bf28fe41d20cf882ab16
+
+COCOAPODS: 1.5.3
