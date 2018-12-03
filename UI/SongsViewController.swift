@@ -107,8 +107,8 @@ class SongsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         player?.stop()
-        player = nil
         SVProgressHUD.dismiss()
+        togglePlayerButton()
     }
     
     class func instantiate(with lookUpItems: [LookUpItem]) -> SongsViewController {

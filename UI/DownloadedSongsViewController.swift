@@ -73,7 +73,7 @@ class DownloadedSongsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         player?.stop()
-        player = nil
+        togglePlayerButton()
     }
     
     func registerObservation() {
