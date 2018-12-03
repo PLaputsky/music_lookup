@@ -32,7 +32,11 @@ class ViewController: UIViewController {
         
         title = "Artists"
         tableVIew.isHidden = true
-        updateData()
+        
+        switch Reachability()!.connection {
+        case .cellular, .wifi: updateData()
+        case .none: handleError()
+        }
     }
     
     func updateData() {
@@ -82,7 +86,7 @@ class ViewController: UIViewController {
         self.tableVIew.reloadData()
     }
 
-    func handleError(_ error: Error?) {
+    func handleError(_ error: Error? = nil) {
         errorLabel.text = "Something was going wrong.\nPlease check Internet connection\nand try to refresh data"
         errorButton.setTitle("Refresh data", for: .normal)
         showError()

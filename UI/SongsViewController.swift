@@ -37,6 +37,8 @@ class SongsViewController: UIViewController {
 
     @IBOutlet weak var tableVIew: UITableView!
     
+    @IBOutlet weak var touchPreventView: UIView!
+    
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var errorButton: UIButton!
     
@@ -44,6 +46,28 @@ class SongsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var currentSongImageView: UIImageView!
+    @IBOutlet weak var currentSongLabel: UILabel!
+    @IBOutlet weak var playStopButton: UIButton!
+
+    @IBAction func playStopAction() {
+        
+        if currentSongIndex == nil, songs?.isEmpty == false {
+            handleSongTouch(in: tableVIew, at: .init(row: 0, section: 0))
+            return
+        }
+        
+        if player?.isPlaying == true {
+            player?.pause()
+        } else {
+            player?.play()
+        }
+        
+        togglePlayerButton()
+    }
+    
+    var currentSongIndex: Int?
     var player: AVAudioPlayer?
     
     lazy var httpService = HTTPClientQueue(maxConcurrentTasks: 5, operationsBuilder: HTTPOperationBuilderImp())
@@ -54,6 +78,7 @@ class SongsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        touchPreventView.isHidden = true
         
         tableVIew.registerXib(for: AlbumDetailsTableViewCell.self)
         tableVIew.registerXib(for: SongTableViewCell.self)
@@ -162,46 +187,80 @@ extension SongsViewController: UITableViewDelegate {
     }
         
     func handleSongTouch(in tableView: UITableView, at index: IndexPath) {
-        //guard let trackId = songs?[index.row].trackID else { return }
-        //playTrack("\(trackId)")
+        guard let song = songs?[index.row],
+            let preview = song.previewURL,
+            let url = URL(string: preview) else {
+                handlePrrviewError()
+                return
+        }
         
-        guard let preview = songs?[index.row].previewURL else { return }
-        guard let url = URL(string: preview) else { return }
+        currentSongIndex = index.row
+        
         downloadSong(withUrl: url)
     }
     
-    func playTrack(_ trackId: String) {
-        let applicationMusicPlayer = MPMusicPlayerController.applicationMusicPlayer
-        applicationMusicPlayer.setQueue(with: [trackId])
-        applicationMusicPlayer.play()
-        
-    }
-    
     func downloadSong(withUrl url: URL) {
+        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
+        if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
+            playSong(with: cachedResponse.data)
+            return
+        }
+        
         SVProgressHUD.show()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let task = URLSession.shared.downloadTask(with: url) { [weak self] (localUrl, response, error) in
+        touchPreventView.isHidden = false
+        
+        let task = URLSession.shared.downloadTask(with: request) { [weak self] (localUrl, response, error) in
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self?.touchPreventView.isHidden = true
             }
             
-            guard let url = localUrl else { return }
-            
-            if error != nil || localUrl == nil {
+            guard let url = localUrl, error == nil else {
                 self?.handleError()
                 return
             }
             
-            do {
-                self?.player = try AVAudioPlayer(contentsOf: url)
-                self?.player?.play()
-            } catch {
+            guard let data = try? Data(contentsOf: url) else  {
                 self?.handleError()
+                return
             }
             
+            if let response = response, URLCache.shared.cachedResponse(for: request) == nil {
+                let cachedResponse = CachedURLResponse(response: response, data: data)
+                URLCache.shared.storeCachedResponse(cachedResponse, for: request)
+            }
+            
+            DispatchQueue.main.async {
+                self?.playSong(with: data)
+            }
         }
         task.resume()
+    }
+    
+    func playSong(from url: URL) {
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.delegate = self
+            player?.play()
+            updatePlayerWithCurrentSong()
+            togglePlayerButton()
+        } catch {
+            handleError()
+        }
+    }
+    
+    func playSong(with data: Data) {
+        do {
+            player = try AVAudioPlayer(data: data)
+            player?.delegate = self
+            player?.play()
+            updatePlayerWithCurrentSong()
+            togglePlayerButton()
+        } catch {
+            handleError()
+        }
     }
     
     func handleError() {
@@ -212,9 +271,43 @@ extension SongsViewController: UITableViewDelegate {
             
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertConroller.addAction(okAction)
-            self?.show(alertConroller, sender: nil)
+            self?.present(alertConroller, animated: true, completion: nil)
+        }
+    }
+    
+    func handlePrrviewError() {
+        DispatchQueue.main.async { [weak self] in
+            let alertConroller = UIAlertController(title: "Priview error",
+                                                   message: "Preview is not available fot this song.\nPlease select another song to listen preview",
+                                                   preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertConroller.addAction(okAction)
+            self?.present(alertConroller, animated: true, completion: nil)
+        }
+    }
+    
+    func updatePlayerWithCurrentSong() {
+        guard let index = currentSongIndex else { return }
+        guard let currentSong = songs?[index] else { return }
+        currentSongLabel.text = currentSong.trackName
+        if let imageUrlString = currentSong.artworkUrl60, let imageUrl = URL(string:imageUrlString) {
+            currentSongImageView.kf.setImage(with: imageUrl, options: [.transition(.fade(0.2))],
+                                        completionHandler: nil)
+        }
+    }
+    
+    func togglePlayerButton() {
+        if player?.isPlaying == true {
+            playStopButton.setImage(UIImage(named: "Pause"), for: .normal)
+        } else {
+            playStopButton.setImage(UIImage(named: "Play"), for: .normal)
         }
     }
 }
 
-
+extension SongsViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        togglePlayerButton()
+    }
+}
