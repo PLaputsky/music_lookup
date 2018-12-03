@@ -69,7 +69,6 @@ class SongsViewController: UIViewController {
     var currentSongIndex: Int?
     var player: AVAudioPlayer?
     
-    lazy var httpService = HTTPClientQueue(maxConcurrentTasks: 5, operationsBuilder: HTTPOperationBuilderImp())
     lazy var mapper: ModelsMapper = GenericDecodableMapper<LookUpModel>()
     
     var songs: [LookUpItem]?

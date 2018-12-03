@@ -13,20 +13,8 @@
 		3D1A2BC321B35558005F427E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A2BC221B35558005F427E /* Assets.xcassets */; };
 		3D1A2BC621B35558005F427E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D1A2BC421B35558005F427E /* LaunchScreen.storyboard */; };
 		3D1A2BD121B35558005F427E /* iTunesDemoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BD021B35558005F427E /* iTunesDemoAppTests.swift */; };
-		3D1A2BDF21B3576E005F427E /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BDE21B3576E005F427E /* HTTPService.swift */; };
-		3D1A2BE121B3583F005F427E /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BE021B3583F005F427E /* HTTPRequest.swift */; };
-		3D1A2BE321B35858005F427E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BE221B35858005F427E /* HTTPResponse.swift */; };
-		3D1A2BE521B358A1005F427E /* HTTPNetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BE421B358A1005F427E /* HTTPNetworkOperation.swift */; };
-		3D1A2BE721B358D0005F427E /* HTTPOperationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BE621B358D0005F427E /* HTTPOperationBuilder.swift */; };
 		3D1A2BE921B358EC005F427E /* MappingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BE821B358EC005F427E /* MappingProtocol.swift */; };
-		3D1A2BED21B35950005F427E /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BEC21B35950005F427E /* AsyncOperation.swift */; };
 		3D1A2BEF21B359E6005F427E /* JSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BEE21B359E6005F427E /* JSONMapper.swift */; };
-		3D1A2BF121B35AEA005F427E /* HTTPClientQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BF021B35AEA005F427E /* HTTPClientQueue.swift */; };
-		3D1A2BF321B35B91005F427E /* HTTPNetworkOperationImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BF221B35B91005F427E /* HTTPNetworkOperationImp.swift */; };
-		3D1A2BF521B35BC6005F427E /* HTTPOperationBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BF421B35BC6005F427E /* HTTPOperationBuilderImp.swift */; };
-		3D1A2BF721B35C3C005F427E /* AppUserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BF621B35C3C005F427E /* AppUserError.swift */; };
-		3D1A2BFC21B36003005F427E /* LookUpQuerry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BFB21B36003005F427E /* LookUpQuerry.swift */; };
-		3D1A2BFE21B3603F005F427E /* BaseApiQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2BFD21B3603F005F427E /* BaseApiQuery.swift */; };
 		3D1A2C0121B36812005F427E /* LookUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2C0021B36812005F427E /* LookUpModel.swift */; };
 		3D1A2C0321B36A3D005F427E /* GenericDecodableMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A2C0221B36A3D005F427E /* GenericDecodableMapper.swift */; };
 		3DA5826121B411EE006E26E7 /* AlbumsGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5826021B411EE006E26E7 /* AlbumsGalleryViewController.swift */; };
@@ -64,20 +52,8 @@
 		3D1A2BCC21B35558005F427E /* iTunesDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D1A2BD021B35558005F427E /* iTunesDemoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesDemoAppTests.swift; sourceTree = "<group>"; };
 		3D1A2BD221B35558005F427E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3D1A2BDE21B3576E005F427E /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
-		3D1A2BE021B3583F005F427E /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
-		3D1A2BE221B35858005F427E /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		3D1A2BE421B358A1005F427E /* HTTPNetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkOperation.swift; sourceTree = "<group>"; };
-		3D1A2BE621B358D0005F427E /* HTTPOperationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPOperationBuilder.swift; sourceTree = "<group>"; };
 		3D1A2BE821B358EC005F427E /* MappingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingProtocol.swift; sourceTree = "<group>"; };
-		3D1A2BEC21B35950005F427E /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		3D1A2BEE21B359E6005F427E /* JSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMapper.swift; sourceTree = "<group>"; };
-		3D1A2BF021B35AEA005F427E /* HTTPClientQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientQueue.swift; sourceTree = "<group>"; };
-		3D1A2BF221B35B91005F427E /* HTTPNetworkOperationImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkOperationImp.swift; sourceTree = "<group>"; };
-		3D1A2BF421B35BC6005F427E /* HTTPOperationBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPOperationBuilderImp.swift; sourceTree = "<group>"; };
-		3D1A2BF621B35C3C005F427E /* AppUserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserError.swift; sourceTree = "<group>"; };
-		3D1A2BFB21B36003005F427E /* LookUpQuerry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpQuerry.swift; sourceTree = "<group>"; };
-		3D1A2BFD21B3603F005F427E /* BaseApiQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiQuery.swift; sourceTree = "<group>"; };
 		3D1A2C0021B36812005F427E /* LookUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpModel.swift; sourceTree = "<group>"; };
 		3D1A2C0221B36A3D005F427E /* GenericDecodableMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDecodableMapper.swift; sourceTree = "<group>"; };
 		3DA5826021B411EE006E26E7 /* AlbumsGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsGalleryViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				3D1A2BFF21B36782005F427E /* Models */,
-				3D1A2BF821B35F82005F427E /* Queries */,
 			);
 			path = "Business Logic";
 			sourceTree = "<group>";
@@ -198,11 +173,6 @@
 		3D1A2BEA21B35918005F427E /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				3D1A2BDE21B3576E005F427E /* HTTPService.swift */,
-				3D1A2BE021B3583F005F427E /* HTTPRequest.swift */,
-				3D1A2BE221B35858005F427E /* HTTPResponse.swift */,
-				3D1A2BE421B358A1005F427E /* HTTPNetworkOperation.swift */,
-				3D1A2BE621B358D0005F427E /* HTTPOperationBuilder.swift */,
 				3D1A2BE821B358EC005F427E /* MappingProtocol.swift */,
 			);
 			path = Interfaces;
@@ -211,24 +181,10 @@
 		3D1A2BEB21B35926005F427E /* Imp */ = {
 			isa = PBXGroup;
 			children = (
-				3D1A2BEC21B35950005F427E /* AsyncOperation.swift */,
 				3D1A2BEE21B359E6005F427E /* JSONMapper.swift */,
-				3D1A2BF021B35AEA005F427E /* HTTPClientQueue.swift */,
-				3D1A2BF221B35B91005F427E /* HTTPNetworkOperationImp.swift */,
-				3D1A2BF421B35BC6005F427E /* HTTPOperationBuilderImp.swift */,
-				3D1A2BF621B35C3C005F427E /* AppUserError.swift */,
 				3D1A2C0221B36A3D005F427E /* GenericDecodableMapper.swift */,
 			);
 			path = Imp;
-			sourceTree = "<group>";
-		};
-		3D1A2BF821B35F82005F427E /* Queries */ = {
-			isa = PBXGroup;
-			children = (
-				3D1A2BFD21B3603F005F427E /* BaseApiQuery.swift */,
-				3D1A2BFB21B36003005F427E /* LookUpQuerry.swift */,
-			);
-			path = Queries;
 			sourceTree = "<group>";
 		};
 		3D1A2BFF21B36782005F427E /* Models */ = {
@@ -448,29 +404,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D1A2BE721B358D0005F427E /* HTTPOperationBuilder.swift in Sources */,
-				3D1A2BE521B358A1005F427E /* HTTPNetworkOperation.swift in Sources */,
-				3D1A2BDF21B3576E005F427E /* HTTPService.swift in Sources */,
-				3D1A2BE121B3583F005F427E /* HTTPRequest.swift in Sources */,
-				3D1A2BE321B35858005F427E /* HTTPResponse.swift in Sources */,
 				3D1A2C0121B36812005F427E /* LookUpModel.swift in Sources */,
 				3DA5826121B411EE006E26E7 /* AlbumsGalleryViewController.swift in Sources */,
 				3DC1A48921B5863A00E48551 /* DownloadedSongsViewController.swift in Sources */,
-				3D1A2BF321B35B91005F427E /* HTTPNetworkOperationImp.swift in Sources */,
-				3D1A2BF521B35BC6005F427E /* HTTPOperationBuilderImp.swift in Sources */,
 				3D1A2BBE21B35554005F427E /* ViewController.swift in Sources */,
-				3D1A2BFE21B3603F005F427E /* BaseApiQuery.swift in Sources */,
 				3DC3A3B221B462C6004A5747 /* UITableView+Helpers.swift in Sources */,
-				3D1A2BFC21B36003005F427E /* LookUpQuerry.swift in Sources */,
-				3D1A2BF121B35AEA005F427E /* HTTPClientQueue.swift in Sources */,
 				3DC3A3AC21B44DB7004A5747 /* SongsViewController.swift in Sources */,
 				3DA5826421B4129D006E26E7 /* StoryboardControllerProvider.swift in Sources */,
 				3D1A2C0321B36A3D005F427E /* GenericDecodableMapper.swift in Sources */,
 				3D1A2BEF21B359E6005F427E /* JSONMapper.swift in Sources */,
 				3D1A2BE921B358EC005F427E /* MappingProtocol.swift in Sources */,
-				3D1A2BED21B35950005F427E /* AsyncOperation.swift in Sources */,
 				3D1A2BBC21B35554005F427E /* AppDelegate.swift in Sources */,
-				3D1A2BF721B35C3C005F427E /* AppUserError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
